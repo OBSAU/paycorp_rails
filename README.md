@@ -26,7 +26,7 @@ $ gem install paycorp_rails
 ### Initialize the Gateway
 To initialize the gateway, in your `config/application.rb` place the following code and make the necessary changes :
 
-```
+```ruby
 config.after_initialize do
     paycorp_options = {
         client_id: 'CLIENT_ID',
@@ -43,7 +43,7 @@ Note : The `CLIENT_ID`, `HMAC`, `AUTH_TOKEN` and the `ENDPOINT` will be given to
 ### Initiate Payment
 First, you need to send the transaction details to Paycorp and initiate the payment :
 
-```
+```ruby
 payment_options = {
     msg_id: SecureRandom.uuid, # Better generate this and store in the model and then use that in here
     amount: AMOUNT_IN_CENTS,
@@ -65,13 +65,13 @@ If you use the iframe method, use the `paymentPageUrl` for the iframe. If not, r
 ### Complete Payment
 When the user complete the order, the Gateway will redirect to the `return_url` you provided earlier. The gateway will post some data to this url. Capture them and store the necessary ones. You can pick the right order using the `reqid` they send like this :
 
-```
+```ruby
 Order.find_by(reqid: params[:reqid])
 ```
 
 Now the payment is ready to process but it's not complete and the user haven't been charged. You need to send a request to Paycorp and tell them to complete the order :
 
-```
+```ruby
 payment_options = {
     msg_id: @order.msg_id, # Change @order as necessary
     reqid: @order.reqid
