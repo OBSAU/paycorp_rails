@@ -1,3 +1,3 @@
-module PaycorpRails
-  VERSION = "0.0.1"
+class PaycorpRails
+  VERSION = "0.0.2"
 end
