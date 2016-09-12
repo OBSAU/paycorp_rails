@@ -49,48 +49,48 @@ class PaycorpRails
 
     def create_complete_params(payment_options)
         {
-            "version": '1.04',
-            "msgId": "#{payment_options[:msg_id]}", # Make it unique and store in order db
-            "operation": 'PAYMENT_COMPLETE',
-            "requestDate": "#{Time.now.to_formatted_s(:db)}",
-            "validateOnly": false,
-            "requestData": {
-                "reqid": payment_options[:reqid]
+            "version" => '1.04',
+            "msgId" => "#{payment_options[:msg_id]}", # Make it unique and store in order db
+            "operation" => 'PAYMENT_COMPLETE',
+            "requestDate" => "#{Time.now.to_formatted_s(:db)}",
+            "validateOnly" => false,
+            "requestData" => {
+                "reqid" => payment_options[:reqid]
             }
         }
     end
 
     def create_init_params(payment_options)
         {
-            "version": '1.04',
-            "msgId": "#{payment_options[:msg_id]}", # Make it unique and store in order db
-            "operation": 'PAYMENT_INIT',
-            "requestDate": "#{Time.now.to_formatted_s(:db)}",
-            "validateOnly": false,
-            "requestData": {
-                "clientId": @options[:client_id].to_i,
-                "clientIdHash": '',
-                "transactionType": 'PURCHASE',
-                "transactionAmount": {
-                    "totalAmount": 0,
-                    "paymentAmount": payment_options[:amount].to_i,
-                    "serviceFeeAmount": 0,
-                    "currency": payment_options[:currency]
+            "version" => '1.04',
+            "msgId" => "#{payment_options[:msg_id]}", # Make it unique and store in order db
+            "operation" => 'PAYMENT_INIT',
+            "requestDate" => "#{Time.now.to_formatted_s(:db)}",
+            "validateOnly" => false,
+            "requestData" => {
+                "clientId" => @options[:client_id].to_i,
+                "clientIdHash" => '',
+                "transactionType" => 'PURCHASE',
+                "transactionAmount" => {
+                    "totalAmount" => 0,
+                    "paymentAmount" => payment_options[:amount].to_i,
+                    "serviceFeeAmount" => 0,
+                    "currency" => payment_options[:currency]
                 },
-                "redirect": {
-                    "returnUrl": payment_options[:return_url],
-                    "cancelUrl": '',
-                    "returnMethod": 'GET'
+                "redirect" => {
+                    "returnUrl" => payment_options[:return_url],
+                    "cancelUrl" => '',
+                    "returnMethod" => 'GET'
                 },
-                "clientRef": payment_options[:user_id],
-                "comment": '',
-                "tokenize": false,
-                "tokenReference": '',
-                "cssLocation1": payment_options[:css_url],
-                "cssLocation2": '',
-                "useReliability": true,
-                "extraData": {
-                    "orderId": payment_options[:order_id] # optional info
+                "clientRef" => payment_options[:user_id],
+                "comment" => '',
+                "tokenize" => false,
+                "tokenReference" => '',
+                "cssLocation1" => payment_options[:css_url],
+                "cssLocation2" => '',
+                "useReliability" => true,
+                "extraData" => {
+                    "orderId" => payment_options[:order_id] # optional info
                 }
             }
         }
