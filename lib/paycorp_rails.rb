@@ -23,6 +23,10 @@ class PaycorpRails
         JSON.parse(response.read_body)
     end
 
+    def request_hash(payment_options)
+        create_init_params(payment_options)
+    end
+
     private
 
     # Talk to paycorp
@@ -84,7 +88,7 @@ class PaycorpRails
                 },
                 "clientRef" => payment_options[:user_id],
                 "comment" => '',
-                "tokenize" => false,
+                "tokenize" => true,
                 "tokenReference" => '',
                 "cssLocation1" => payment_options[:css_url],
                 "cssLocation2" => '',
