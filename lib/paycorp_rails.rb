@@ -74,7 +74,7 @@ class PaycorpRails
             "requestData" => {
                 "clientId" => @options[:client_id].to_i,
                 "clientIdHash" => '',
-                "transactionType" => 'PURCHASE',
+                "transactionType" => payment_options[:transaction_type],
                 "transactionAmount" => {
                     "totalAmount" => 0,
                     "paymentAmount" => payment_options[:amount].to_i,
@@ -88,7 +88,7 @@ class PaycorpRails
                 },
                 "clientRef" => payment_options[:user_id],
                 "comment" => '',
-                "tokenize" => true,
+                "tokenize" => payment_options[:tokenize],
                 "tokenReference" => '',
                 "cssLocation1" => payment_options[:css_url],
                 "cssLocation2" => '',
